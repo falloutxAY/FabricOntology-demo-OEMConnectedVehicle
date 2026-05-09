@@ -1,0 +1,5 @@
+PolicyId,WPol_DurMon,WPol_KmLimit,WPol_Coverage
+WPOL-B2B-4Y,48,80000,Bumper2Bumper
+WPOL-EVPK-8Y,96,160000,EVPack
+WPOL-PT-5Y,60,100000,Powertrain
+WPOL-HV-8Y,96,160000,HighVolt

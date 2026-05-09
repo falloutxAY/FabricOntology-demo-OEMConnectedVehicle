@@ -1,0 +1,9 @@
+EventId,QE_Severity,QE_Description,QE_DetectDt,QE_Resolution
+QE-001,Critical,NMC battery cell thermal runaway in qualification test - lot LOT-2026-NMC-CN-0447,2026-05-03T11:20:00Z,Open
+QE-002,Critical,Front airbag igniter missing primer charge - lot LOT-AB-JP-2026-031,2026-05-04T08:55:00Z,Open
+QE-003,Major,ADAS camera optical alignment out of spec,2026-05-04T14:30:00Z,Resolved
+QE-004,Critical,Battery pack busbar weld failure under vibration test,2026-05-05T09:10:00Z,Open
+QE-005,Major,HV wiring harness routing interference with chassis cross-member,2026-05-05T15:45:00Z,Resolved
+QE-006,Minor,IVI screen cosmetic scratch on factory protective film,2026-05-06T11:30:00Z,Resolved
+QE-007,Major,Drive unit gearbox oil leak at delivery inspection,2026-05-07T07:50:00Z,InProgress
+QE-008,Critical,ADAS radar module bracket fatigue crack identified during PDI,2026-05-07T13:15:00Z,Open

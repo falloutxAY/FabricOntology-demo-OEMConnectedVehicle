@@ -1,0 +1,388 @@
+@prefix : <http://example.com/oemconnectedvehicle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# Ontology Declaration
+# =============================================================================
+
+<http://example.com/oemconnectedvehicle> a owl:Ontology ;
+    rdfs:label "NovaDrive Motors - OEM Connected Vehicle Lifecycle Ontology" ;
+    rdfs:comment "End-to-end OEM ontology spanning manufacturing, customer ownership, connected vehicle telemetry, OTA software, dealer service, warranty, recall, and EU Battery Passport compliance. VIN is the universal identity spine." .
+
+# =============================================================================
+# Entity Classes (21 total)
+# =============================================================================
+
+:ConnectedVehicle a owl:Class ;
+    rdfs:label "ConnectedVehicle" ;
+    rdfs:comment "Key: VIN (string)" .
+
+:VehicleVariant a owl:Class ;
+    rdfs:label "VehicleVariant" ;
+    rdfs:comment "Key: VariantId (string)" .
+
+:SoftwareRelease a owl:Class ;
+    rdfs:label "SoftwareRelease" ;
+    rdfs:comment "Key: SwReleaseId (string)" .
+
+:CustomerProfile a owl:Class ;
+    rdfs:label "CustomerProfile" ;
+    rdfs:comment "Key: CustomerId (string)" .
+
+:VehicleOwner a owl:Class ;
+    rdfs:label "VehicleOwner" ;
+    rdfs:comment "Key: OwnerId (string)" .
+
+:DriveSession a owl:Class ;
+    rdfs:label "DriveSession" ;
+    rdfs:comment "Key: SessionId (string)" .
+
+:OTAUpdate a owl:Class ;
+    rdfs:label "OTAUpdate" ;
+    rdfs:comment "Key: OTAUpdateId (string)" .
+
+:ServiceVisit a owl:Class ;
+    rdfs:label "ServiceVisit" ;
+    rdfs:comment "Key: VisitId (string)" .
+
+:RepairTicket a owl:Class ;
+    rdfs:label "RepairTicket" ;
+    rdfs:comment "Key: TicketId (string)" .
+
+:TechServiceBul a owl:Class ;
+    rdfs:label "TechServiceBul" ;
+    rdfs:comment "Key: TSBId (string)" .
+
+:WarrantyClaim a owl:Class ;
+    rdfs:label "WarrantyClaim" ;
+    rdfs:comment "Key: ClaimId (string)" .
+
+:WarrantyPolicy a owl:Class ;
+    rdfs:label "WarrantyPolicy" ;
+    rdfs:comment "Key: PolicyId (string)" .
+
+:RecallCampaign a owl:Class ;
+    rdfs:label "RecallCampaign" ;
+    rdfs:comment "Key: RecallId (string)" .
+
+:BatteryPassport a owl:Class ;
+    rdfs:label "BatteryPassport" ;
+    rdfs:comment "Key: BattPassId (string)" .
+
+:Component a owl:Class ;
+    rdfs:label "Component" ;
+    rdfs:comment "Key: ComponentId (string)" .
+
+:QualityEvent a owl:Class ;
+    rdfs:label "QualityEvent" ;
+    rdfs:comment "Key: EventId (string)" .
+
+:Supplier a owl:Class ;
+    rdfs:label "Supplier" ;
+    rdfs:comment "Key: SupplierId (string)" .
+
+:Assembly a owl:Class ;
+    rdfs:label "Assembly" ;
+    rdfs:comment "Key: AssemblyId (string)" .
+
+:Facility a owl:Class ;
+    rdfs:label "Facility" ;
+    rdfs:comment "Key: FacilityId (string)" .
+
+:ProductionOrder a owl:Class ;
+    rdfs:label "ProductionOrder" ;
+    rdfs:comment "Key: ProdOrderId (string)" .
+
+:DealerLocation a owl:Class ;
+    rdfs:label "DealerLocation" ;
+    rdfs:comment "Key: DealerId (string)" .
+
+:ComplianceRule a owl:Class ;
+    rdfs:label "ComplianceRule" ;
+    rdfs:comment "Key: RuleId (string). Holds a natural-language rule (regulation, internal policy, security policy) that AI agents read to reason about compliance, eligibility, or escalation. Rules are not machine-evaluated by Fabric Graph; the agent applies them when answering." .
+
+# =============================================================================
+# ConnectedVehicle properties (static + timeseries)
+# =============================================================================
+
+:VIN a owl:DatatypeProperty ; rdfs:label "VIN" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:string .
+:CV_Model a owl:DatatypeProperty ; rdfs:label "CV_Model" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:string .
+:CV_BuildYr a owl:DatatypeProperty ; rdfs:label "CV_BuildYr" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:integer .
+:CV_Status a owl:DatatypeProperty ; rdfs:label "CV_Status" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:string .
+:CV_RegMarket a owl:DatatypeProperty ; rdfs:label "CV_RegMarket" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:string .
+:CV_OdoKm a owl:DatatypeProperty ; rdfs:label "CV_OdoKm" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:integer .
+:CV_SoCPct a owl:DatatypeProperty ; rdfs:label "CV_SoCPct" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:double ; rdfs:comment "State of charge % (timeseries)" .
+:CV_BattTempC a owl:DatatypeProperty ; rdfs:label "CV_BattTempC" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:double ; rdfs:comment "Battery pack temp C (timeseries)" .
+:CV_DTCCount a owl:DatatypeProperty ; rdfs:label "CV_DTCCount" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:integer ; rdfs:comment "Active diagnostic trouble code count (timeseries)" .
+:CV_SpeedKmh a owl:DatatypeProperty ; rdfs:label "CV_SpeedKmh" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:double ; rdfs:comment "Speed kmh (timeseries)" .
+:CV_RangeKm a owl:DatatypeProperty ; rdfs:label "CV_RangeKm" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:double ; rdfs:comment "Estimated range km (timeseries)" .
+:CV_OnlineFlag a owl:DatatypeProperty ; rdfs:label "CV_OnlineFlag" ; rdfs:domain :ConnectedVehicle ; rdfs:range xsd:integer ; rdfs:comment "Online in last hour 1/0 (timeseries)" .
+
+# =============================================================================
+# VehicleVariant
+# =============================================================================
+
+:VariantId a owl:DatatypeProperty ; rdfs:label "VariantId" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:string .
+:VV_Name a owl:DatatypeProperty ; rdfs:label "VV_Name" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:string .
+:VV_Platform a owl:DatatypeProperty ; rdfs:label "VV_Platform" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:string .
+:VV_Powertrain a owl:DatatypeProperty ; rdfs:label "VV_Powertrain" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:string .
+:VV_CO2gKm a owl:DatatypeProperty ; rdfs:label "VV_CO2gKm" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:double .
+:VV_Segment a owl:DatatypeProperty ; rdfs:label "VV_Segment" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:string .
+:VV_LaunchYr a owl:DatatypeProperty ; rdfs:label "VV_LaunchYr" ; rdfs:domain :VehicleVariant ; rdfs:range xsd:integer .
+
+# =============================================================================
+# SoftwareRelease
+# =============================================================================
+
+:SwReleaseId a owl:DatatypeProperty ; rdfs:label "SwReleaseId" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:string .
+:SwRel_Version a owl:DatatypeProperty ; rdfs:label "SwRel_Version" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:string .
+:SwRel_Stack a owl:DatatypeProperty ; rdfs:label "SwRel_Stack" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:string .
+:SwRel_Severity a owl:DatatypeProperty ; rdfs:label "SwRel_Severity" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:string .
+:SwRel_CVE a owl:DatatypeProperty ; rdfs:label "SwRel_CVE" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:string .
+:SwRel_PublishDt a owl:DatatypeProperty ; rdfs:label "SwRel_PublishDt" ; rdfs:domain :SoftwareRelease ; rdfs:range xsd:dateTime .
+
+# =============================================================================
+# CustomerProfile
+# =============================================================================
+
+:CustomerId a owl:DatatypeProperty ; rdfs:label "CustomerId" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:string .
+:Cust_Name a owl:DatatypeProperty ; rdfs:label "Cust_Name" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:string .
+:Cust_City a owl:DatatypeProperty ; rdfs:label "Cust_City" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:string .
+:Cust_Country a owl:DatatypeProperty ; rdfs:label "Cust_Country" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:string .
+:Cust_NPS a owl:DatatypeProperty ; rdfs:label "Cust_NPS" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:integer .
+:Cust_Segment a owl:DatatypeProperty ; rdfs:label "Cust_Segment" ; rdfs:domain :CustomerProfile ; rdfs:range xsd:string .
+
+# =============================================================================
+# VehicleOwner
+# =============================================================================
+
+:OwnerId a owl:DatatypeProperty ; rdfs:label "OwnerId" ; rdfs:domain :VehicleOwner ; rdfs:range xsd:string .
+:Owner_StartDt a owl:DatatypeProperty ; rdfs:label "Owner_StartDt" ; rdfs:domain :VehicleOwner ; rdfs:range xsd:dateTime .
+:Owner_EndDt a owl:DatatypeProperty ; rdfs:label "Owner_EndDt" ; rdfs:domain :VehicleOwner ; rdfs:range xsd:dateTime .
+:Owner_Channel a owl:DatatypeProperty ; rdfs:label "Owner_Channel" ; rdfs:domain :VehicleOwner ; rdfs:range xsd:string .
+
+# =============================================================================
+# DriveSession (static + timeseries)
+# =============================================================================
+
+:SessionId a owl:DatatypeProperty ; rdfs:label "SessionId" ; rdfs:domain :DriveSession ; rdfs:range xsd:string .
+:DS_StartDt a owl:DatatypeProperty ; rdfs:label "DS_StartDt" ; rdfs:domain :DriveSession ; rdfs:range xsd:dateTime .
+:DS_DistKm a owl:DatatypeProperty ; rdfs:label "DS_DistKm" ; rdfs:domain :DriveSession ; rdfs:range xsd:double .
+:DS_DurationMin a owl:DatatypeProperty ; rdfs:label "DS_DurationMin" ; rdfs:domain :DriveSession ; rdfs:range xsd:double .
+:DS_Region a owl:DatatypeProperty ; rdfs:label "DS_Region" ; rdfs:domain :DriveSession ; rdfs:range xsd:string .
+:DS_AvgSpdKmh a owl:DatatypeProperty ; rdfs:label "DS_AvgSpdKmh" ; rdfs:domain :DriveSession ; rdfs:range xsd:double ; rdfs:comment "Trip avg speed (timeseries)" .
+:DS_HrshBrkCnt a owl:DatatypeProperty ; rdfs:label "DS_HrshBrkCnt" ; rdfs:domain :DriveSession ; rdfs:range xsd:integer ; rdfs:comment "Harsh brake count per session (timeseries)" .
+:DS_MaxBattTempC a owl:DatatypeProperty ; rdfs:label "DS_MaxBattTempC" ; rdfs:domain :DriveSession ; rdfs:range xsd:double ; rdfs:comment "Max battery temp C (timeseries)" .
+:DS_EnergyKWh a owl:DatatypeProperty ; rdfs:label "DS_EnergyKWh" ; rdfs:domain :DriveSession ; rdfs:range xsd:double ; rdfs:comment "Trip energy used kWh (timeseries)" .
+
+# =============================================================================
+# OTAUpdate
+# =============================================================================
+
+:OTAUpdateId a owl:DatatypeProperty ; rdfs:label "OTAUpdateId" ; rdfs:domain :OTAUpdate ; rdfs:range xsd:string .
+:OTA_PushDt a owl:DatatypeProperty ; rdfs:label "OTA_PushDt" ; rdfs:domain :OTAUpdate ; rdfs:range xsd:dateTime .
+:OTA_Status a owl:DatatypeProperty ; rdfs:label "OTA_Status" ; rdfs:domain :OTAUpdate ; rdfs:range xsd:string .
+:OTA_RetryCnt a owl:DatatypeProperty ; rdfs:label "OTA_RetryCnt" ; rdfs:domain :OTAUpdate ; rdfs:range xsd:integer .
+
+# =============================================================================
+# ServiceVisit
+# =============================================================================
+
+:VisitId a owl:DatatypeProperty ; rdfs:label "VisitId" ; rdfs:domain :ServiceVisit ; rdfs:range xsd:string .
+:SVisit_BookDt a owl:DatatypeProperty ; rdfs:label "SVisit_BookDt" ; rdfs:domain :ServiceVisit ; rdfs:range xsd:dateTime .
+:SVisit_Status a owl:DatatypeProperty ; rdfs:label "SVisit_Status" ; rdfs:domain :ServiceVisit ; rdfs:range xsd:string .
+:SVisit_Reason a owl:DatatypeProperty ; rdfs:label "SVisit_Reason" ; rdfs:domain :ServiceVisit ; rdfs:range xsd:string .
+
+# =============================================================================
+# RepairTicket
+# =============================================================================
+
+:TicketId a owl:DatatypeProperty ; rdfs:label "TicketId" ; rdfs:domain :RepairTicket ; rdfs:range xsd:string .
+:Repair_LaborHr a owl:DatatypeProperty ; rdfs:label "Repair_LaborHr" ; rdfs:domain :RepairTicket ; rdfs:range xsd:double .
+:Repair_PartsUSD a owl:DatatypeProperty ; rdfs:label "Repair_PartsUSD" ; rdfs:domain :RepairTicket ; rdfs:range xsd:double .
+:Repair_State a owl:DatatypeProperty ; rdfs:label "Repair_State" ; rdfs:domain :RepairTicket ; rdfs:range xsd:string .
+
+# =============================================================================
+# TechServiceBul
+# =============================================================================
+
+:TSBId a owl:DatatypeProperty ; rdfs:label "TSBId" ; rdfs:domain :TechServiceBul ; rdfs:range xsd:string .
+:TSB_Title a owl:DatatypeProperty ; rdfs:label "TSB_Title" ; rdfs:domain :TechServiceBul ; rdfs:range xsd:string .
+:TSB_IssueDt a owl:DatatypeProperty ; rdfs:label "TSB_IssueDt" ; rdfs:domain :TechServiceBul ; rdfs:range xsd:dateTime .
+:TSB_LaborCode a owl:DatatypeProperty ; rdfs:label "TSB_LaborCode" ; rdfs:domain :TechServiceBul ; rdfs:range xsd:string .
+
+# =============================================================================
+# WarrantyClaim
+# =============================================================================
+
+:ClaimId a owl:DatatypeProperty ; rdfs:label "ClaimId" ; rdfs:domain :WarrantyClaim ; rdfs:range xsd:string .
+:WClaim_FilingDt a owl:DatatypeProperty ; rdfs:label "WClaim_FilingDt" ; rdfs:domain :WarrantyClaim ; rdfs:range xsd:dateTime .
+:WClaim_CostUSD a owl:DatatypeProperty ; rdfs:label "WClaim_CostUSD" ; rdfs:domain :WarrantyClaim ; rdfs:range xsd:double .
+:WClaim_State a owl:DatatypeProperty ; rdfs:label "WClaim_State" ; rdfs:domain :WarrantyClaim ; rdfs:range xsd:string .
+:WClaim_DTC a owl:DatatypeProperty ; rdfs:label "WClaim_DTC" ; rdfs:domain :WarrantyClaim ; rdfs:range xsd:string .
+
+# =============================================================================
+# WarrantyPolicy
+# =============================================================================
+
+:PolicyId a owl:DatatypeProperty ; rdfs:label "PolicyId" ; rdfs:domain :WarrantyPolicy ; rdfs:range xsd:string .
+:WPol_DurMon a owl:DatatypeProperty ; rdfs:label "WPol_DurMon" ; rdfs:domain :WarrantyPolicy ; rdfs:range xsd:integer .
+:WPol_KmLimit a owl:DatatypeProperty ; rdfs:label "WPol_KmLimit" ; rdfs:domain :WarrantyPolicy ; rdfs:range xsd:integer .
+:WPol_Coverage a owl:DatatypeProperty ; rdfs:label "WPol_Coverage" ; rdfs:domain :WarrantyPolicy ; rdfs:range xsd:string .
+
+# =============================================================================
+# RecallCampaign
+# =============================================================================
+
+:RecallId a owl:DatatypeProperty ; rdfs:label "RecallId" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:string .
+:Recall_Title a owl:DatatypeProperty ; rdfs:label "Recall_Title" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:string .
+:Recall_NHTSAId a owl:DatatypeProperty ; rdfs:label "Recall_NHTSAId" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:string .
+:Recall_OpenDt a owl:DatatypeProperty ; rdfs:label "Recall_OpenDt" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:dateTime .
+:Recall_State a owl:DatatypeProperty ; rdfs:label "Recall_State" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:string .
+:Recall_Region a owl:DatatypeProperty ; rdfs:label "Recall_Region" ; rdfs:domain :RecallCampaign ; rdfs:range xsd:string .
+
+# =============================================================================
+# BatteryPassport
+# =============================================================================
+
+:BattPassId a owl:DatatypeProperty ; rdfs:label "BattPassId" ; rdfs:domain :BatteryPassport ; rdfs:range xsd:string .
+:BPass_SoH a owl:DatatypeProperty ; rdfs:label "BPass_SoH" ; rdfs:domain :BatteryPassport ; rdfs:range xsd:double .
+:BPass_kgCO2e a owl:DatatypeProperty ; rdfs:label "BPass_kgCO2e" ; rdfs:domain :BatteryPassport ; rdfs:range xsd:double .
+:BPass_Mineral a owl:DatatypeProperty ; rdfs:label "BPass_Mineral" ; rdfs:domain :BatteryPassport ; rdfs:range xsd:string .
+:BPass_OriginCty a owl:DatatypeProperty ; rdfs:label "BPass_OriginCty" ; rdfs:domain :BatteryPassport ; rdfs:range xsd:string .
+
+# =============================================================================
+# Component
+# =============================================================================
+
+:ComponentId a owl:DatatypeProperty ; rdfs:label "ComponentId" ; rdfs:domain :Component ; rdfs:range xsd:string .
+:Comp_Name a owl:DatatypeProperty ; rdfs:label "Comp_Name" ; rdfs:domain :Component ; rdfs:range xsd:string .
+:Comp_PartNum a owl:DatatypeProperty ; rdfs:label "Comp_PartNum" ; rdfs:domain :Component ; rdfs:range xsd:string .
+:Comp_LotId a owl:DatatypeProperty ; rdfs:label "Comp_LotId" ; rdfs:domain :Component ; rdfs:range xsd:string .
+:Comp_Category a owl:DatatypeProperty ; rdfs:label "Comp_Category" ; rdfs:domain :Component ; rdfs:range xsd:string .
+:Comp_UnitCost a owl:DatatypeProperty ; rdfs:label "Comp_UnitCost" ; rdfs:domain :Component ; rdfs:range xsd:double .
+
+# =============================================================================
+# QualityEvent
+# =============================================================================
+
+:EventId a owl:DatatypeProperty ; rdfs:label "EventId" ; rdfs:domain :QualityEvent ; rdfs:range xsd:string .
+:QE_Severity a owl:DatatypeProperty ; rdfs:label "QE_Severity" ; rdfs:domain :QualityEvent ; rdfs:range xsd:string .
+:QE_Description a owl:DatatypeProperty ; rdfs:label "QE_Description" ; rdfs:domain :QualityEvent ; rdfs:range xsd:string .
+:QE_DetectDt a owl:DatatypeProperty ; rdfs:label "QE_DetectDt" ; rdfs:domain :QualityEvent ; rdfs:range xsd:dateTime .
+:QE_Resolution a owl:DatatypeProperty ; rdfs:label "QE_Resolution" ; rdfs:domain :QualityEvent ; rdfs:range xsd:string .
+
+# =============================================================================
+# Supplier
+# =============================================================================
+
+:SupplierId a owl:DatatypeProperty ; rdfs:label "SupplierId" ; rdfs:domain :Supplier ; rdfs:range xsd:string .
+:Sup_Name a owl:DatatypeProperty ; rdfs:label "Sup_Name" ; rdfs:domain :Supplier ; rdfs:range xsd:string .
+:Sup_Country a owl:DatatypeProperty ; rdfs:label "Sup_Country" ; rdfs:domain :Supplier ; rdfs:range xsd:string .
+:Sup_Tier a owl:DatatypeProperty ; rdfs:label "Sup_Tier" ; rdfs:domain :Supplier ; rdfs:range xsd:integer .
+:Sup_Rating a owl:DatatypeProperty ; rdfs:label "Sup_Rating" ; rdfs:domain :Supplier ; rdfs:range xsd:double .
+:Sup_Certified a owl:DatatypeProperty ; rdfs:label "Sup_Certified" ; rdfs:domain :Supplier ; rdfs:range xsd:boolean .
+
+# =============================================================================
+# Assembly (static + timeseries)
+# =============================================================================
+
+:AssemblyId a owl:DatatypeProperty ; rdfs:label "AssemblyId" ; rdfs:domain :Assembly ; rdfs:range xsd:string .
+:Asm_Type a owl:DatatypeProperty ; rdfs:label "Asm_Type" ; rdfs:domain :Assembly ; rdfs:range xsd:string .
+:Asm_StationId a owl:DatatypeProperty ; rdfs:label "Asm_StationId" ; rdfs:domain :Assembly ; rdfs:range xsd:string .
+:Asm_State a owl:DatatypeProperty ; rdfs:label "Asm_State" ; rdfs:domain :Assembly ; rdfs:range xsd:string .
+:Asm_StartDt a owl:DatatypeProperty ; rdfs:label "Asm_StartDt" ; rdfs:domain :Assembly ; rdfs:range xsd:dateTime .
+:Asm_TempC a owl:DatatypeProperty ; rdfs:label "Asm_TempC" ; rdfs:domain :Assembly ; rdfs:range xsd:double ; rdfs:comment "Station temp C (timeseries)" .
+:Asm_TorqueNm a owl:DatatypeProperty ; rdfs:label "Asm_TorqueNm" ; rdfs:domain :Assembly ; rdfs:range xsd:double ; rdfs:comment "Torque Nm (timeseries)" .
+:Asm_CycleSec a owl:DatatypeProperty ; rdfs:label "Asm_CycleSec" ; rdfs:domain :Assembly ; rdfs:range xsd:double ; rdfs:comment "Cycle time seconds (timeseries)" .
+
+# =============================================================================
+# Facility (static + timeseries)
+# =============================================================================
+
+:FacilityId a owl:DatatypeProperty ; rdfs:label "FacilityId" ; rdfs:domain :Facility ; rdfs:range xsd:string .
+:Fac_Name a owl:DatatypeProperty ; rdfs:label "Fac_Name" ; rdfs:domain :Facility ; rdfs:range xsd:string .
+:Fac_City a owl:DatatypeProperty ; rdfs:label "Fac_City" ; rdfs:domain :Facility ; rdfs:range xsd:string .
+:Fac_Country a owl:DatatypeProperty ; rdfs:label "Fac_Country" ; rdfs:domain :Facility ; rdfs:range xsd:string .
+:Fac_TypeKind a owl:DatatypeProperty ; rdfs:label "Fac_TypeKind" ; rdfs:domain :Facility ; rdfs:range xsd:string .
+:Fac_EnergyKWh a owl:DatatypeProperty ; rdfs:label "Fac_EnergyKWh" ; rdfs:domain :Facility ; rdfs:range xsd:double ; rdfs:comment "Plant energy consumption kWh (timeseries)" .
+:Fac_HumidPct a owl:DatatypeProperty ; rdfs:label "Fac_HumidPct" ; rdfs:domain :Facility ; rdfs:range xsd:double ; rdfs:comment "Humidity % (timeseries)" .
+:Fac_ProdRateHr a owl:DatatypeProperty ; rdfs:label "Fac_ProdRateHr" ; rdfs:domain :Facility ; rdfs:range xsd:double ; rdfs:comment "Production rate units/hr (timeseries)" .
+
+# =============================================================================
+# ProductionOrder
+# =============================================================================
+
+:ProdOrderId a owl:DatatypeProperty ; rdfs:label "ProdOrderId" ; rdfs:domain :ProductionOrder ; rdfs:range xsd:string .
+:PO_Number a owl:DatatypeProperty ; rdfs:label "PO_Number" ; rdfs:domain :ProductionOrder ; rdfs:range xsd:string .
+:PO_Quantity a owl:DatatypeProperty ; rdfs:label "PO_Quantity" ; rdfs:domain :ProductionOrder ; rdfs:range xsd:integer .
+:PO_Priority a owl:DatatypeProperty ; rdfs:label "PO_Priority" ; rdfs:domain :ProductionOrder ; rdfs:range xsd:string .
+:PO_DueDt a owl:DatatypeProperty ; rdfs:label "PO_DueDt" ; rdfs:domain :ProductionOrder ; rdfs:range xsd:dateTime .
+
+# =============================================================================
+# DealerLocation (static + timeseries)
+# =============================================================================
+
+:DealerId a owl:DatatypeProperty ; rdfs:label "DealerId" ; rdfs:domain :DealerLocation ; rdfs:range xsd:string .
+:Dealer_Name a owl:DatatypeProperty ; rdfs:label "Dealer_Name" ; rdfs:domain :DealerLocation ; rdfs:range xsd:string .
+:Dealer_City a owl:DatatypeProperty ; rdfs:label "Dealer_City" ; rdfs:domain :DealerLocation ; rdfs:range xsd:string .
+:Dealer_Country a owl:DatatypeProperty ; rdfs:label "Dealer_Country" ; rdfs:domain :DealerLocation ; rdfs:range xsd:string .
+:Dealer_EVCert a owl:DatatypeProperty ; rdfs:label "Dealer_EVCert" ; rdfs:domain :DealerLocation ; rdfs:range xsd:boolean .
+:Dealer_OpenBays a owl:DatatypeProperty ; rdfs:label "Dealer_OpenBays" ; rdfs:domain :DealerLocation ; rdfs:range xsd:integer ; rdfs:comment "Open service bays available (timeseries)" .
+:Dealer_KitsInStk a owl:DatatypeProperty ; rdfs:label "Dealer_KitsInStk" ; rdfs:domain :DealerLocation ; rdfs:range xsd:integer ; rdfs:comment "Recall repair kits in stock (timeseries)" .
+
+# =============================================================================
+# ComplianceRule properties (NL rules the agent reasons over)
+# =============================================================================
+
+:RuleId a owl:DatatypeProperty ; rdfs:label "RuleId" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string .
+:CR_Domain a owl:DatatypeProperty ; rdfs:label "CR_Domain" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string ; rdfs:comment "Regulatory or policy domain: IRA / EU-Battery / NHTSA / CSRD / Internal-Warranty / OTA-Security" .
+:CR_Title a owl:DatatypeProperty ; rdfs:label "CR_Title" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string .
+:CR_NLText a owl:DatatypeProperty ; rdfs:label "CR_NLText" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string ; rdfs:comment "The full natural-language statement of the rule. Agents MUST read this and apply it when answering questions in the rule's domain." .
+:CR_Authority a owl:DatatypeProperty ; rdfs:label "CR_Authority" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string ; rdfs:comment "Issuing body: US-IRS, EU-Commission, NHTSA, NovaDrive-Internal, etc." .
+:CR_EffectiveDt a owl:DatatypeProperty ; rdfs:label "CR_EffectiveDt" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:dateTime .
+:CR_Severity a owl:DatatypeProperty ; rdfs:label "CR_Severity" ; rdfs:domain :ComplianceRule ; rdfs:range xsd:string ; rdfs:comment "Mandatory / Recommended / Internal-Goodwill" .
+
+# =============================================================================
+# Object Properties (Relationships) - 33 total (29 lifecycle + 4 governance)
+# =============================================================================
+# =============================================================================
+
+:IS_VARIANT a owl:ObjectProperty ; rdfs:label "IS_VARIANT" ; rdfs:domain :ConnectedVehicle ; rdfs:range :VehicleVariant .
+:HAS_SW_RELEASE a owl:ObjectProperty ; rdfs:label "HAS_SW_RELEASE" ; rdfs:domain :VehicleVariant ; rdfs:range :SoftwareRelease .
+:BUILT_FROM_PO a owl:ObjectProperty ; rdfs:label "BUILT_FROM_PO" ; rdfs:domain :ConnectedVehicle ; rdfs:range :ProductionOrder .
+:HAS_BATT_PASS a owl:ObjectProperty ; rdfs:label "HAS_BATT_PASS" ; rdfs:domain :ConnectedVehicle ; rdfs:range :BatteryPassport .
+:HAD_SESSION a owl:ObjectProperty ; rdfs:label "HAD_SESSION" ; rdfs:domain :ConnectedVehicle ; rdfs:range :DriveSession .
+:RECEIVED_OTA a owl:ObjectProperty ; rdfs:label "RECEIVED_OTA" ; rdfs:domain :ConnectedVehicle ; rdfs:range :OTAUpdate .
+:HAS_CLAIM a owl:ObjectProperty ; rdfs:label "HAS_CLAIM" ; rdfs:domain :ConnectedVehicle ; rdfs:range :WarrantyClaim .
+:HAD_SERVICE a owl:ObjectProperty ; rdfs:label "HAD_SERVICE" ; rdfs:domain :ConnectedVehicle ; rdfs:range :ServiceVisit .
+:BUILT_AT a owl:ObjectProperty ; rdfs:label "BUILT_AT" ; rdfs:domain :ProductionOrder ; rdfs:range :Facility .
+:INSTALLED_IN a owl:ObjectProperty ; rdfs:label "INSTALLED_IN" ; rdfs:domain :Assembly ; rdfs:range :ConnectedVehicle .
+:USES_COMPONENT a owl:ObjectProperty ; rdfs:label "USES_COMPONENT" ; rdfs:domain :Assembly ; rdfs:range :Component .
+:AFFECTS_ASM a owl:ObjectProperty ; rdfs:label "AFFECTS_ASM" ; rdfs:domain :QualityEvent ; rdfs:range :Assembly .
+:DEPLOYS_VERSION a owl:ObjectProperty ; rdfs:label "DEPLOYS_VERSION" ; rdfs:domain :OTAUpdate ; rdfs:range :SoftwareRelease .
+:CUST_OWNS a owl:ObjectProperty ; rdfs:label "CUST_OWNS" ; rdfs:domain :CustomerProfile ; rdfs:range :VehicleOwner .
+:OWNS_VEHICLE a owl:ObjectProperty ; rdfs:label "OWNS_VEHICLE" ; rdfs:domain :VehicleOwner ; rdfs:range :ConnectedVehicle .
+:AT_DEALER a owl:ObjectProperty ; rdfs:label "AT_DEALER" ; rdfs:domain :ServiceVisit ; rdfs:range :DealerLocation .
+:LEADS_TO_REPAIR a owl:ObjectProperty ; rdfs:label "LEADS_TO_REPAIR" ; rdfs:domain :ServiceVisit ; rdfs:range :RepairTicket .
+:FOLLOWS_TSB a owl:ObjectProperty ; rdfs:label "FOLLOWS_TSB" ; rdfs:domain :RepairTicket ; rdfs:range :TechServiceBul .
+:COVERED_BY a owl:ObjectProperty ; rdfs:label "COVERED_BY" ; rdfs:domain :WarrantyClaim ; rdfs:range :WarrantyPolicy .
+:RESOLVED_BY a owl:ObjectProperty ; rdfs:label "RESOLVED_BY" ; rdfs:domain :WarrantyClaim ; rdfs:range :RepairTicket .
+:CAUSED_BY_QE a owl:ObjectProperty ; rdfs:label "CAUSED_BY_QE" ; rdfs:domain :RecallCampaign ; rdfs:range :QualityEvent .
+:AFFECTS_VARIANT a owl:ObjectProperty ; rdfs:label "AFFECTS_VARIANT" ; rdfs:domain :RecallCampaign ; rdfs:range :VehicleVariant .
+:AFFECTS_VEHICLE a owl:ObjectProperty ; rdfs:label "AFFECTS_VEHICLE" ; rdfs:domain :RecallCampaign ; rdfs:range :ConnectedVehicle .
+:REQUIRES_TSB a owl:ObjectProperty ; rdfs:label "REQUIRES_TSB" ; rdfs:domain :RecallCampaign ; rdfs:range :TechServiceBul .
+:ISSUED_FOR a owl:ObjectProperty ; rdfs:label "ISSUED_FOR" ; rdfs:domain :BatteryPassport ; rdfs:range :ConnectedVehicle .
+:TRACES_COMP a owl:ObjectProperty ; rdfs:label "TRACES_COMP" ; rdfs:domain :BatteryPassport ; rdfs:range :Component .
+:SUPPLIED_BY a owl:ObjectProperty ; rdfs:label "SUPPLIED_BY" ; rdfs:domain :Component ; rdfs:range :Supplier .
+:OPERATES_AT a owl:ObjectProperty ; rdfs:label "OPERATES_AT" ; rdfs:domain :Supplier ; rdfs:range :Facility .
+:CERTIFIED_FOR a owl:ObjectProperty ; rdfs:label "CERTIFIED_FOR" ; rdfs:domain :DealerLocation ; rdfs:range :VehicleVariant .
+
+# Governance edges - ComplianceRule applies to the entity it governs
+:GOVERNS_BATT_PASS a owl:ObjectProperty ; rdfs:label "GOVERNS_BATT_PASS" ; rdfs:domain :ComplianceRule ; rdfs:range :BatteryPassport .
+:GOVERNS_POLICY a owl:ObjectProperty ; rdfs:label "GOVERNS_POLICY" ; rdfs:domain :ComplianceRule ; rdfs:range :WarrantyPolicy .
+:GOVERNS_RECALL a owl:ObjectProperty ; rdfs:label "GOVERNS_RECALL" ; rdfs:domain :ComplianceRule ; rdfs:range :RecallCampaign .
+:GOVERNS_SW a owl:ObjectProperty ; rdfs:label "GOVERNS_SW" ; rdfs:domain :ComplianceRule ; rdfs:range :SoftwareRelease .

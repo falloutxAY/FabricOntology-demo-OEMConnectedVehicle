@@ -1,0 +1,355 @@
+_schema_version: "1.0"
+
+metadata:
+  name: "OEMConnectedVehicle"
+  version: "1.0"
+  description: "OEM Connected Vehicle Lifecycle ontology for NovaDrive Motors - manufacturing, customer ownership, connected telemetry, OTA, dealer service, warranty, recall, and EU Battery Passport compliance"
+  company: "NovaDrive Motors"
+  domain: "Automotive OEM"
+  created: "2026-05-08"
+
+lakehouse:
+  name: "OEMConnectedVehicle_Lakehouse"
+  entities:
+    - entity: ConnectedVehicle
+      sourceTable: DimConnectedVehicle
+      keyColumn: VIN
+      file: Data/Lakehouse/DimConnectedVehicle.csv
+      properties:
+        - { property: VIN, column: VIN, type: string }
+        - { property: CV_Model, column: CV_Model, type: string }
+        - { property: CV_BuildYr, column: CV_BuildYr, type: int }
+        - { property: CV_Status, column: CV_Status, type: string }
+        - { property: CV_RegMarket, column: CV_RegMarket, type: string }
+        - { property: CV_OdoKm, column: CV_OdoKm, type: int }
+
+    - entity: VehicleVariant
+      sourceTable: DimVehicleVariant
+      keyColumn: VariantId
+      file: Data/Lakehouse/DimVehicleVariant.csv
+      properties:
+        - { property: VariantId, column: VariantId, type: string }
+        - { property: VV_Name, column: VV_Name, type: string }
+        - { property: VV_Platform, column: VV_Platform, type: string }
+        - { property: VV_Powertrain, column: VV_Powertrain, type: string }
+        - { property: VV_CO2gKm, column: VV_CO2gKm, type: double }
+        - { property: VV_Segment, column: VV_Segment, type: string }
+        - { property: VV_LaunchYr, column: VV_LaunchYr, type: int }
+
+    - entity: SoftwareRelease
+      sourceTable: DimSoftwareRelease
+      keyColumn: SwReleaseId
+      file: Data/Lakehouse/DimSoftwareRelease.csv
+      properties:
+        - { property: SwReleaseId, column: SwReleaseId, type: string }
+        - { property: SwRel_Version, column: SwRel_Version, type: string }
+        - { property: SwRel_Stack, column: SwRel_Stack, type: string }
+        - { property: SwRel_Severity, column: SwRel_Severity, type: string }
+        - { property: SwRel_CVE, column: SwRel_CVE, type: string }
+        - { property: SwRel_PublishDt, column: SwRel_PublishDt, type: datetime }
+
+    - entity: CustomerProfile
+      sourceTable: DimCustomerProfile
+      keyColumn: CustomerId
+      file: Data/Lakehouse/DimCustomerProfile.csv
+      properties:
+        - { property: CustomerId, column: CustomerId, type: string }
+        - { property: Cust_Name, column: Cust_Name, type: string }
+        - { property: Cust_City, column: Cust_City, type: string }
+        - { property: Cust_Country, column: Cust_Country, type: string }
+        - { property: Cust_NPS, column: Cust_NPS, type: int }
+        - { property: Cust_Segment, column: Cust_Segment, type: string }
+
+    - entity: VehicleOwner
+      sourceTable: DimVehicleOwner
+      keyColumn: OwnerId
+      file: Data/Lakehouse/DimVehicleOwner.csv
+      properties:
+        - { property: OwnerId, column: OwnerId, type: string }
+        - { property: Owner_StartDt, column: Owner_StartDt, type: datetime }
+        - { property: Owner_EndDt, column: Owner_EndDt, type: datetime }
+        - { property: Owner_Channel, column: Owner_Channel, type: string }
+
+    - entity: DriveSession
+      sourceTable: DimDriveSession
+      keyColumn: SessionId
+      file: Data/Lakehouse/DimDriveSession.csv
+      properties:
+        - { property: SessionId, column: SessionId, type: string }
+        - { property: DS_StartDt, column: DS_StartDt, type: datetime }
+        - { property: DS_DistKm, column: DS_DistKm, type: double }
+        - { property: DS_DurationMin, column: DS_DurationMin, type: double }
+        - { property: DS_Region, column: DS_Region, type: string }
+
+    - entity: OTAUpdate
+      sourceTable: DimOTAUpdate
+      keyColumn: OTAUpdateId
+      file: Data/Lakehouse/DimOTAUpdate.csv
+      properties:
+        - { property: OTAUpdateId, column: OTAUpdateId, type: string }
+        - { property: OTA_PushDt, column: OTA_PushDt, type: datetime }
+        - { property: OTA_Status, column: OTA_Status, type: string }
+        - { property: OTA_RetryCnt, column: OTA_RetryCnt, type: int }
+
+    - entity: ServiceVisit
+      sourceTable: DimServiceVisit
+      keyColumn: VisitId
+      file: Data/Lakehouse/DimServiceVisit.csv
+      properties:
+        - { property: VisitId, column: VisitId, type: string }
+        - { property: SVisit_BookDt, column: SVisit_BookDt, type: datetime }
+        - { property: SVisit_Status, column: SVisit_Status, type: string }
+        - { property: SVisit_Reason, column: SVisit_Reason, type: string }
+
+    - entity: RepairTicket
+      sourceTable: DimRepairTicket
+      keyColumn: TicketId
+      file: Data/Lakehouse/DimRepairTicket.csv
+      properties:
+        - { property: TicketId, column: TicketId, type: string }
+        - { property: Repair_LaborHr, column: Repair_LaborHr, type: double }
+        - { property: Repair_PartsUSD, column: Repair_PartsUSD, type: double }
+        - { property: Repair_State, column: Repair_State, type: string }
+
+    - entity: TechServiceBul
+      sourceTable: DimTechServiceBul
+      keyColumn: TSBId
+      file: Data/Lakehouse/DimTechServiceBul.csv
+      properties:
+        - { property: TSBId, column: TSBId, type: string }
+        - { property: TSB_Title, column: TSB_Title, type: string }
+        - { property: TSB_IssueDt, column: TSB_IssueDt, type: datetime }
+        - { property: TSB_LaborCode, column: TSB_LaborCode, type: string }
+
+    - entity: WarrantyClaim
+      sourceTable: DimWarrantyClaim
+      keyColumn: ClaimId
+      file: Data/Lakehouse/DimWarrantyClaim.csv
+      properties:
+        - { property: ClaimId, column: ClaimId, type: string }
+        - { property: WClaim_FilingDt, column: WClaim_FilingDt, type: datetime }
+        - { property: WClaim_CostUSD, column: WClaim_CostUSD, type: double }
+        - { property: WClaim_State, column: WClaim_State, type: string }
+        - { property: WClaim_DTC, column: WClaim_DTC, type: string }
+
+    - entity: WarrantyPolicy
+      sourceTable: DimWarrantyPolicy
+      keyColumn: PolicyId
+      file: Data/Lakehouse/DimWarrantyPolicy.csv
+      properties:
+        - { property: PolicyId, column: PolicyId, type: string }
+        - { property: WPol_DurMon, column: WPol_DurMon, type: int }
+        - { property: WPol_KmLimit, column: WPol_KmLimit, type: int }
+        - { property: WPol_Coverage, column: WPol_Coverage, type: string }
+
+    - entity: RecallCampaign
+      sourceTable: DimRecallCampaign
+      keyColumn: RecallId
+      file: Data/Lakehouse/DimRecallCampaign.csv
+      properties:
+        - { property: RecallId, column: RecallId, type: string }
+        - { property: Recall_Title, column: Recall_Title, type: string }
+        - { property: Recall_NHTSAId, column: Recall_NHTSAId, type: string }
+        - { property: Recall_OpenDt, column: Recall_OpenDt, type: datetime }
+        - { property: Recall_State, column: Recall_State, type: string }
+        - { property: Recall_Region, column: Recall_Region, type: string }
+
+    - entity: BatteryPassport
+      sourceTable: DimBatteryPassport
+      keyColumn: BattPassId
+      file: Data/Lakehouse/DimBatteryPassport.csv
+      properties:
+        - { property: BattPassId, column: BattPassId, type: string }
+        - { property: BPass_SoH, column: BPass_SoH, type: double }
+        - { property: BPass_kgCO2e, column: BPass_kgCO2e, type: double }
+        - { property: BPass_Mineral, column: BPass_Mineral, type: string }
+        - { property: BPass_OriginCty, column: BPass_OriginCty, type: string }
+
+    - entity: Component
+      sourceTable: DimComponent
+      keyColumn: ComponentId
+      file: Data/Lakehouse/DimComponent.csv
+      properties:
+        - { property: ComponentId, column: ComponentId, type: string }
+        - { property: Comp_Name, column: Comp_Name, type: string }
+        - { property: Comp_PartNum, column: Comp_PartNum, type: string }
+        - { property: Comp_LotId, column: Comp_LotId, type: string }
+        - { property: Comp_Category, column: Comp_Category, type: string }
+        - { property: Comp_UnitCost, column: Comp_UnitCost, type: double }
+
+    - entity: QualityEvent
+      sourceTable: DimQualityEvent
+      keyColumn: EventId
+      file: Data/Lakehouse/DimQualityEvent.csv
+      properties:
+        - { property: EventId, column: EventId, type: string }
+        - { property: QE_Severity, column: QE_Severity, type: string }
+        - { property: QE_Description, column: QE_Description, type: string }
+        - { property: QE_DetectDt, column: QE_DetectDt, type: datetime }
+        - { property: QE_Resolution, column: QE_Resolution, type: string }
+
+    - entity: Supplier
+      sourceTable: DimSupplier
+      keyColumn: SupplierId
+      file: Data/Lakehouse/DimSupplier.csv
+      properties:
+        - { property: SupplierId, column: SupplierId, type: string }
+        - { property: Sup_Name, column: Sup_Name, type: string }
+        - { property: Sup_Country, column: Sup_Country, type: string }
+        - { property: Sup_Tier, column: Sup_Tier, type: int }
+        - { property: Sup_Rating, column: Sup_Rating, type: double }
+        - { property: Sup_Certified, column: Sup_Certified, type: boolean }
+
+    - entity: Assembly
+      sourceTable: DimAssembly
+      keyColumn: AssemblyId
+      file: Data/Lakehouse/DimAssembly.csv
+      properties:
+        - { property: AssemblyId, column: AssemblyId, type: string }
+        - { property: Asm_Type, column: Asm_Type, type: string }
+        - { property: Asm_StationId, column: Asm_StationId, type: string }
+        - { property: Asm_State, column: Asm_State, type: string }
+        - { property: Asm_StartDt, column: Asm_StartDt, type: datetime }
+
+    - entity: Facility
+      sourceTable: DimFacility
+      keyColumn: FacilityId
+      file: Data/Lakehouse/DimFacility.csv
+      properties:
+        - { property: FacilityId, column: FacilityId, type: string }
+        - { property: Fac_Name, column: Fac_Name, type: string }
+        - { property: Fac_City, column: Fac_City, type: string }
+        - { property: Fac_Country, column: Fac_Country, type: string }
+        - { property: Fac_TypeKind, column: Fac_TypeKind, type: string }
+
+    - entity: ProductionOrder
+      sourceTable: DimProductionOrder
+      keyColumn: ProdOrderId
+      file: Data/Lakehouse/DimProductionOrder.csv
+      properties:
+        - { property: ProdOrderId, column: ProdOrderId, type: string }
+        - { property: PO_Number, column: PO_Number, type: string }
+        - { property: PO_Quantity, column: PO_Quantity, type: int }
+        - { property: PO_Priority, column: PO_Priority, type: string }
+        - { property: PO_DueDt, column: PO_DueDt, type: datetime }
+
+    - entity: DealerLocation
+      sourceTable: DimDealerLocation
+      keyColumn: DealerId
+      file: Data/Lakehouse/DimDealerLocation.csv
+      properties:
+        - { property: DealerId, column: DealerId, type: string }
+        - { property: Dealer_Name, column: Dealer_Name, type: string }
+        - { property: Dealer_City, column: Dealer_City, type: string }
+        - { property: Dealer_Country, column: Dealer_Country, type: string }
+        - { property: Dealer_EVCert, column: Dealer_EVCert, type: boolean }
+
+    - entity: ComplianceRule
+      sourceTable: DimComplianceRule
+      keyColumn: RuleId
+      file: Data/Lakehouse/DimComplianceRule.csv
+      properties:
+        - { property: RuleId, column: RuleId, type: string }
+        - { property: CR_Domain, column: CR_Domain, type: string }
+        - { property: CR_Title, column: CR_Title, type: string }
+        - { property: CR_NLText, column: CR_NLText, type: string }
+        - { property: CR_Authority, column: CR_Authority, type: string }
+        - { property: CR_EffectiveDt, column: CR_EffectiveDt, type: datetime }
+        - { property: CR_Severity, column: CR_Severity, type: string }
+
+  relationships:
+    - { relationship: IS_VARIANT, sourceEntity: ConnectedVehicle, targetEntity: VehicleVariant, sourceTable: EdgeCV_Variant, sourceKeyColumn: VIN, targetKeyColumn: VariantId }
+    - { relationship: HAS_SW_RELEASE, sourceEntity: VehicleVariant, targetEntity: SoftwareRelease, sourceTable: EdgeVariant_SwRelease, sourceKeyColumn: VariantId, targetKeyColumn: SwReleaseId }
+    - { relationship: BUILT_FROM_PO, sourceEntity: ConnectedVehicle, targetEntity: ProductionOrder, sourceTable: EdgeCV_PO, sourceKeyColumn: VIN, targetKeyColumn: ProdOrderId }
+    - { relationship: HAS_BATT_PASS, sourceEntity: ConnectedVehicle, targetEntity: BatteryPassport, sourceTable: EdgeCV_BattPass, sourceKeyColumn: VIN, targetKeyColumn: BattPassId }
+    - { relationship: HAD_SESSION, sourceEntity: ConnectedVehicle, targetEntity: DriveSession, sourceTable: EdgeCV_Session, sourceKeyColumn: VIN, targetKeyColumn: SessionId }
+    - { relationship: RECEIVED_OTA, sourceEntity: ConnectedVehicle, targetEntity: OTAUpdate, sourceTable: EdgeCV_OTA, sourceKeyColumn: VIN, targetKeyColumn: OTAUpdateId }
+    - { relationship: HAS_CLAIM, sourceEntity: ConnectedVehicle, targetEntity: WarrantyClaim, sourceTable: EdgeCV_Claim, sourceKeyColumn: VIN, targetKeyColumn: ClaimId }
+    - { relationship: HAD_SERVICE, sourceEntity: ConnectedVehicle, targetEntity: ServiceVisit, sourceTable: EdgeCV_Service, sourceKeyColumn: VIN, targetKeyColumn: VisitId }
+    - { relationship: BUILT_AT, sourceEntity: ProductionOrder, targetEntity: Facility, sourceTable: EdgePO_Facility, sourceKeyColumn: ProdOrderId, targetKeyColumn: FacilityId }
+    - { relationship: INSTALLED_IN, sourceEntity: Assembly, targetEntity: ConnectedVehicle, sourceTable: EdgeAsm_CV, sourceKeyColumn: AssemblyId, targetKeyColumn: VIN }
+    - { relationship: USES_COMPONENT, sourceEntity: Assembly, targetEntity: Component, sourceTable: EdgeAsm_Comp, sourceKeyColumn: AssemblyId, targetKeyColumn: ComponentId }
+    - { relationship: AFFECTS_ASM, sourceEntity: QualityEvent, targetEntity: Assembly, sourceTable: EdgeQE_Asm, sourceKeyColumn: EventId, targetKeyColumn: AssemblyId }
+    - { relationship: DEPLOYS_VERSION, sourceEntity: OTAUpdate, targetEntity: SoftwareRelease, sourceTable: EdgeOTA_SwRelease, sourceKeyColumn: OTAUpdateId, targetKeyColumn: SwReleaseId }
+    - { relationship: CUST_OWNS, sourceEntity: CustomerProfile, targetEntity: VehicleOwner, sourceTable: EdgeCustomer_Owner, sourceKeyColumn: CustomerId, targetKeyColumn: OwnerId }
+    - { relationship: OWNS_VEHICLE, sourceEntity: VehicleOwner, targetEntity: ConnectedVehicle, sourceTable: EdgeOwner_CV, sourceKeyColumn: OwnerId, targetKeyColumn: VIN }
+    - { relationship: AT_DEALER, sourceEntity: ServiceVisit, targetEntity: DealerLocation, sourceTable: EdgeService_Dealer, sourceKeyColumn: VisitId, targetKeyColumn: DealerId }
+    - { relationship: LEADS_TO_REPAIR, sourceEntity: ServiceVisit, targetEntity: RepairTicket, sourceTable: EdgeService_Repair, sourceKeyColumn: VisitId, targetKeyColumn: TicketId }
+    - { relationship: FOLLOWS_TSB, sourceEntity: RepairTicket, targetEntity: TechServiceBul, sourceTable: EdgeRepair_TSB, sourceKeyColumn: TicketId, targetKeyColumn: TSBId }
+    - { relationship: COVERED_BY, sourceEntity: WarrantyClaim, targetEntity: WarrantyPolicy, sourceTable: EdgeClaim_Policy, sourceKeyColumn: ClaimId, targetKeyColumn: PolicyId }
+    - { relationship: RESOLVED_BY, sourceEntity: WarrantyClaim, targetEntity: RepairTicket, sourceTable: EdgeClaim_Repair, sourceKeyColumn: ClaimId, targetKeyColumn: TicketId }
+    - { relationship: CAUSED_BY_QE, sourceEntity: RecallCampaign, targetEntity: QualityEvent, sourceTable: EdgeRecall_QE, sourceKeyColumn: RecallId, targetKeyColumn: EventId }
+    - { relationship: AFFECTS_VARIANT, sourceEntity: RecallCampaign, targetEntity: VehicleVariant, sourceTable: EdgeRecall_Variant, sourceKeyColumn: RecallId, targetKeyColumn: VariantId }
+    - { relationship: AFFECTS_VEHICLE, sourceEntity: RecallCampaign, targetEntity: ConnectedVehicle, sourceTable: EdgeRecall_CV, sourceKeyColumn: RecallId, targetKeyColumn: VIN }
+    - { relationship: REQUIRES_TSB, sourceEntity: RecallCampaign, targetEntity: TechServiceBul, sourceTable: EdgeRecall_TSB, sourceKeyColumn: RecallId, targetKeyColumn: TSBId }
+    - { relationship: ISSUED_FOR, sourceEntity: BatteryPassport, targetEntity: ConnectedVehicle, sourceTable: EdgeBPass_CV, sourceKeyColumn: BattPassId, targetKeyColumn: VIN }
+    - { relationship: TRACES_COMP, sourceEntity: BatteryPassport, targetEntity: Component, sourceTable: EdgeBPass_Comp, sourceKeyColumn: BattPassId, targetKeyColumn: ComponentId }
+    - { relationship: SUPPLIED_BY, sourceEntity: Component, targetEntity: Supplier, sourceTable: EdgeComp_Supplier, sourceKeyColumn: ComponentId, targetKeyColumn: SupplierId }
+    - { relationship: OPERATES_AT, sourceEntity: Supplier, targetEntity: Facility, sourceTable: EdgeSupplier_Facility, sourceKeyColumn: SupplierId, targetKeyColumn: FacilityId }
+    - { relationship: CERTIFIED_FOR, sourceEntity: DealerLocation, targetEntity: VehicleVariant, sourceTable: EdgeDealer_Variant, sourceKeyColumn: DealerId, targetKeyColumn: VariantId }
+    - { relationship: GOVERNS_BATT_PASS, sourceEntity: ComplianceRule, targetEntity: BatteryPassport, sourceTable: EdgeRule_BattPass, sourceKeyColumn: RuleId, targetKeyColumn: BattPassId }
+    - { relationship: GOVERNS_POLICY, sourceEntity: ComplianceRule, targetEntity: WarrantyPolicy, sourceTable: EdgeRule_Policy, sourceKeyColumn: RuleId, targetKeyColumn: PolicyId }
+    - { relationship: GOVERNS_RECALL, sourceEntity: ComplianceRule, targetEntity: RecallCampaign, sourceTable: EdgeRule_Recall, sourceKeyColumn: RuleId, targetKeyColumn: RecallId }
+    - { relationship: GOVERNS_SW, sourceEntity: ComplianceRule, targetEntity: SoftwareRelease, sourceTable: EdgeRule_SwRelease, sourceKeyColumn: RuleId, targetKeyColumn: SwReleaseId }
+
+eventhouse:
+  name: "OEMConnectedVehicle_Telemetry"
+  database: "OEMConnectedVehicleDB"
+  entities:
+    - entity: ConnectedVehicle
+      sourceTable: ConnectedVehicleTelemetry
+      keyColumn: VIN
+      timestampColumn: Timestamp
+      file: Data/Eventhouse/ConnectedVehicleTelemetry.csv
+      rowCount: 33
+      properties:
+        - { property: CV_SoCPct, column: CV_SoCPct, type: double }
+        - { property: CV_BattTempC, column: CV_BattTempC, type: double }
+        - { property: CV_DTCCount, column: CV_DTCCount, type: int }
+        - { property: CV_SpeedKmh, column: CV_SpeedKmh, type: double }
+        - { property: CV_RangeKm, column: CV_RangeKm, type: double }
+        - { property: CV_OnlineFlag, column: CV_OnlineFlag, type: int }
+
+    - entity: DriveSession
+      sourceTable: DriveSessionTelemetry
+      keyColumn: SessionId
+      timestampColumn: Timestamp
+      file: Data/Eventhouse/DriveSessionTelemetry.csv
+      rowCount: 20
+      properties:
+        - { property: DS_AvgSpdKmh, column: DS_AvgSpdKmh, type: double }
+        - { property: DS_HrshBrkCnt, column: DS_HrshBrkCnt, type: int }
+        - { property: DS_MaxBattTempC, column: DS_MaxBattTempC, type: double }
+        - { property: DS_EnergyKWh, column: DS_EnergyKWh, type: double }
+
+    - entity: Assembly
+      sourceTable: AssemblyTelemetry
+      keyColumn: AssemblyId
+      timestampColumn: Timestamp
+      file: Data/Eventhouse/AssemblyTelemetry.csv
+      rowCount: 24
+      properties:
+        - { property: Asm_TempC, column: Asm_TempC, type: double }
+        - { property: Asm_TorqueNm, column: Asm_TorqueNm, type: double }
+        - { property: Asm_CycleSec, column: Asm_CycleSec, type: double }
+
+    - entity: Facility
+      sourceTable: FacilityTelemetry
+      keyColumn: FacilityId
+      timestampColumn: Timestamp
+      file: Data/Eventhouse/FacilityTelemetry.csv
+      rowCount: 21
+      properties:
+        - { property: Fac_EnergyKWh, column: Fac_EnergyKWh, type: double }
+        - { property: Fac_HumidPct, column: Fac_HumidPct, type: double }
+        - { property: Fac_ProdRateHr, column: Fac_ProdRateHr, type: double }
+
+    - entity: DealerLocation
+      sourceTable: DealerCapacityTelemetry
+      keyColumn: DealerId
+      timestampColumn: Timestamp
+      file: Data/Eventhouse/DealerCapacityTelemetry.csv
+      rowCount: 18
+      properties:
+        - { property: Dealer_OpenBays, column: Dealer_OpenBays, type: int }
+        - { property: Dealer_KitsInStk, column: Dealer_KitsInStk, type: int }

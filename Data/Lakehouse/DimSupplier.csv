@@ -1,0 +1,9 @@
+SupplierId,Sup_Name,Sup_Country,Sup_Tier,Sup_Rating,Sup_Certified
+SUP-VOLT,VoltCell Energy Systems,China,1,4.3,true
+SUP-KSPARK,KSpark Cells Inc,South Korea,1,4.7,true
+SUP-KASAI,KasaiCobalt Mining,DR Congo,2,3.4,false
+SUP-NLITH,NorthLithium Pty,Australia,2,4.6,true
+SUP-INNERVE,InnerveDrive Motors,Germany,1,4.8,true
+SUP-SAFEAIR,SafeAir Modules KK,Japan,1,4.9,true
+SUP-LUMEN,LumenADAS Corp,USA,1,4.5,true
+SUP-CHASSIS,SteelChassis Holdings,Mexico,1,4.2,true

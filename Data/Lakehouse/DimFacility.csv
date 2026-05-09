@@ -1,0 +1,9 @@
+FacilityId,Fac_Name,Fac_City,Fac_Country,Fac_TypeKind
+FAC-DET-01,NovaDrive Detroit Assembly,Detroit,USA,Plant
+FAC-STG-01,NovaDrive Stuttgart Assembly,Stuttgart,Germany,Plant
+FAC-WUH-01,NovaDrive Wuhan Assembly,Wuhan,China,Plant
+FAC-CELL-CN,VoltCell Wuhan Battery Plant,Wuhan,China,Plant
+FAC-CELL-KR,KSpark Cells Ulsan,Ulsan,South Korea,Plant
+FAC-MINE-CG,KasaiCobalt Kolwezi Mine,Kolwezi,DR Congo,Mine
+FAC-MINE-AU,NorthLithium Kalgoorlie,Kalgoorlie,Australia,Mine
+FAC-WAR-DET,Detroit Distribution Hub,Detroit,USA,Warehouse

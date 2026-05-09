@@ -1,0 +1,9 @@
+DealerId,Dealer_Name,Dealer_City,Dealer_Country,Dealer_EVCert
+DEAL-DET-01,NovaDrive Detroit Flagship,Detroit,USA,true
+DEAL-BOS-01,NovaDrive Boston East,Boston,USA,true
+DEAL-DAL-01,NovaDrive Dallas Fleet,Dallas,USA,true
+DEAL-STG-01,NovaDrive Stuttgart Hauptstrasse,Stuttgart,Germany,true
+DEAL-MUN-01,NovaDrive Munich,Munich,Germany,true
+DEAL-LDN-01,NovaDrive London Mayfair,London,UK,true
+DEAL-PAR-01,NovaDrive Paris 16e,Paris,France,true
+DEAL-SHA-01,NovaDrive Shanghai Pudong,Shanghai,China,true

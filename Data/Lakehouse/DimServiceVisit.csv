@@ -1,0 +1,16 @@
+VisitId,SVisit_BookDt,SVisit_Status,SVisit_Reason
+SV-001,2026-05-01T09:00:00Z,Done,Annual service
+SV-002,2026-05-02T10:30:00Z,Done,Battery diagnostic
+SV-003,2026-05-02T14:00:00Z,Done,Recall remediation
+SV-004,2026-05-03T08:30:00Z,Done,Tire rotation
+SV-005,2026-05-03T11:15:00Z,Done,Software update
+SV-006,2026-05-03T15:00:00Z,Done,DTC investigation
+SV-007,2026-05-04T09:45:00Z,Done,Brake service
+SV-008,2026-05-04T13:30:00Z,Done,Recall remediation
+SV-009,2026-05-05T10:00:00Z,Booked,ADAS calibration
+SV-010,2026-05-05T14:30:00Z,Done,Battery degradation review
+SV-011,2026-05-06T09:15:00Z,Done,Goodwill repair
+SV-012,2026-05-06T13:00:00Z,Booked,Recall remediation
+SV-013,2026-05-07T10:45:00Z,Done,Drive unit oil leak
+SV-014,2026-05-07T15:30:00Z,Booked,Software update
+SV-015,2026-05-08T09:00:00Z,Booked,Battery diagnostic

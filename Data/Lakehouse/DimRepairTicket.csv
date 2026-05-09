@@ -1,0 +1,16 @@
+TicketId,Repair_LaborHr,Repair_PartsUSD,Repair_State
+RT-001,2.5,180.0,Done
+RT-002,4.0,2400.0,Done
+RT-003,1.5,420.0,Done
+RT-004,0.8,40.0,Done
+RT-005,3.2,68.0,Done
+RT-006,5.5,3850.0,Done
+RT-007,2.1,210.0,Done
+RT-008,1.8,420.0,Done
+RT-009,3.0,580.0,Open
+RT-010,6.5,8400.0,Done
+RT-011,2.4,150.0,Done
+RT-012,1.7,420.0,Open
+RT-013,4.8,890.0,Done
+RT-014,1.2,0.0,Open
+RT-015,5.0,7800.0,Open

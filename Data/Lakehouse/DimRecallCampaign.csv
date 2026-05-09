@@ -1,0 +1,4 @@
+RecallId,Recall_Title,Recall_NHTSAId,Recall_OpenDt,Recall_State,Recall_Region
+REC-2026-014,NMC Battery Pack Thermal Runaway Risk - lot LOT-2026-NMC-CN-0447,26V214000,2026-05-04T00:00:00Z,Open,Global
+REC-2026-015,Front Airbag Inflator Igniter Defect - lot LOT-AB-JP-2026-031,26V215000,2026-05-05T00:00:00Z,Open,Global
+REC-2026-016,ADAS Radar Bracket Fatigue Crack - lot LOT-AR-US-2026-019,26V216000,2026-05-07T00:00:00Z,Open,US-EU

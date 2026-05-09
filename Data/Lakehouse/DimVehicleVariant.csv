@@ -1,0 +1,6 @@
+VariantId,VV_Name,VV_Platform,VV_Powertrain,VV_CO2gKm,VV_Segment,VV_LaunchYr
+VAR-EQ5-AMG-25,NovaDrive EQ5 AMG Line,EVA-Pro,BEV,0.0,Premium-Sedan,2025
+VAR-EQ5-LX-25,NovaDrive EQ5 Luxury,EVA-Pro,BEV,0.0,Premium-Sedan,2025
+VAR-LIGHT-25,NovaDrive Light SUV,EVA-Compact,BEV,0.0,Compact-SUV,2025
+VAR-CRUISER-25,NovaDrive Cruiser PHEV,Hybrid-Plus,PHEV,42.5,Mid-SUV,2025
+VAR-VOYAGER-24,NovaDrive Voyager,Legacy-V2,ICE,148.0,Full-SUV,2024

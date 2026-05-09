@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NovaDrive Motors — OEM Connected Vehicle Lifecycle Ontology</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #0c1f3a 0%, #1f4068 50%, #2c5282 100%);
+    color: #fff;
+    min-height: 100vh;
+  }
+  header {
+    padding: 32px 48px 16px 48px;
+  }
+  h1 { font-size: 2.4em; margin: 0 0 8px 0; }
+  .tagline { opacity: 0.85; font-size: 1.05em; }
+  .metrics {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    padding: 16px 48px;
+  }
+  .metric {
+    flex: 1 1 160px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+    backdrop-filter: blur(6px);
+  }
+  .metric .num { font-size: 1.8em; font-weight: 600; color: #7dd3fc; }
+  .metric .lbl { opacity: 0.8; font-size: 0.85em; }
+  .diagram {
+    background: rgba(255,255,255,0.95);
+    color: #111;
+    margin: 16px 48px 24px 48px;
+    padding: 28px;
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 0 48px 32px 48px;
+  }
+  .legend-item {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.9em;
+  }
+  .legend-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>NovaDrive Motors — OEM Connected Vehicle Lifecycle</h1>
+  <div class="tagline">From factory to customer to recall — one semantic graph, infinite questions.</div>
+</header>
+
+<section class="metrics">
+  <div class="metric"><div class="num">22</div><div class="lbl">Entity Types</div></div>
+  <div class="metric"><div class="num">33</div><div class="lbl">Relationships</div></div>
+  <div class="metric"><div class="num">5</div><div class="lbl">Timeseries Streams</div></div>
+  <div class="metric"><div class="num">8</div><div class="lbl">Compliance Rules (NL)</div></div>
+  <div class="metric"><div class="num">7</div><div class="lbl">Business Units Served</div></div>
+  <div class="metric"><div class="num">VIN</div><div class="lbl">Universal Identity Spine</div></div>
+</section>
+
+<div class="diagram">
+<pre class="mermaid">
+erDiagram
+    ComplianceRule }o--o{ BatteryPassport : "GOVERNS_BATT_PASS"
+    ComplianceRule }o--o{ WarrantyPolicy : "GOVERNS_POLICY"
+    ComplianceRule }o--o{ RecallCampaign : "GOVERNS_RECALL"
+    ComplianceRule }o--o{ SoftwareRelease : "GOVERNS_SW"
+    ConnectedVehicle }o--|| VehicleVariant : "IS_VARIANT"
+    VehicleVariant ||--o{ SoftwareRelease : "HAS_SW_RELEASE"
+    ConnectedVehicle }o--|| ProductionOrder : "BUILT_FROM_PO"
+    ConnectedVehicle ||--|| BatteryPassport : "HAS_BATT_PASS"
+    ConnectedVehicle ||--o{ DriveSession : "HAD_SESSION"
+    ConnectedVehicle ||--o{ OTAUpdate : "RECEIVED_OTA"
+    ConnectedVehicle ||--o{ WarrantyClaim : "HAS_CLAIM"
+    ConnectedVehicle ||--o{ ServiceVisit : "HAD_SERVICE"
+    ProductionOrder }o--|| Facility : "BUILT_AT"
+    Assembly }o--|| ConnectedVehicle : "INSTALLED_IN"
+    Assembly }o--o{ Component : "USES_COMPONENT"
+    QualityEvent }o--|| Assembly : "AFFECTS_ASM"
+    OTAUpdate }o--|| SoftwareRelease : "DEPLOYS_VERSION"
+    CustomerProfile ||--o{ VehicleOwner : "CUST_OWNS"
+    VehicleOwner }o--|| ConnectedVehicle : "OWNS_VEHICLE"
+    ServiceVisit }o--|| DealerLocation : "AT_DEALER"
+    ServiceVisit ||--o{ RepairTicket : "LEADS_TO_REPAIR"
+    RepairTicket }o--|| TechServiceBul : "FOLLOWS_TSB"
+    WarrantyClaim }o--|| WarrantyPolicy : "COVERED_BY"
+    WarrantyClaim ||--|| RepairTicket : "RESOLVED_BY"
+    RecallCampaign }o--|| QualityEvent : "CAUSED_BY_QE"
+    RecallCampaign }o--o{ VehicleVariant : "AFFECTS_VARIANT"
+    RecallCampaign }o--o{ ConnectedVehicle : "AFFECTS_VEHICLE"
+    RecallCampaign }o--|| TechServiceBul : "REQUIRES_TSB"
+    BatteryPassport }o--o{ Component : "TRACES_COMP"
+    Component }o--|| Supplier : "SUPPLIED_BY"
+    Supplier }o--|| Facility : "OPERATES_AT"
+    DealerLocation }o--o{ VehicleVariant : "CERTIFIED_FOR"
+</pre>
+</div>
+
+<section class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:#7dd3fc"></span>Manufacturing — Assembly, Component, Supplier, Facility, ProductionOrder, QualityEvent</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#fbbf24"></span>Customer / Connected — ConnectedVehicle, CustomerProfile, VehicleOwner, DriveSession</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#f87171"></span>Service & Warranty — ServiceVisit, RepairTicket, WarrantyClaim, WarrantyPolicy, TSB, DealerLocation</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span>Software / OTA — SoftwareRelease, OTAUpdate, VehicleVariant</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#34d399"></span>Sustainability / Compliance — BatteryPassport, RecallCampaign</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#f472b6"></span>Governance — ComplianceRule (NL rules the agent reasons over: IRA, EU Battery Reg, NHTSA, CSRD, Internal-Warranty, OTA-Security)</div>
+</section>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>

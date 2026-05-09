@@ -1,0 +1,13 @@
+CustomerId,Cust_Name,Cust_City,Cust_Country,Cust_NPS,Cust_Segment
+CUST-001,Ada Cline,Detroit,USA,9,Retail
+CUST-002,Marcus Whittaker,Boston,USA,7,Retail
+CUST-003,Sofia Renner,Stuttgart,Germany,8,Retail
+CUST-004,Henrik Vogel,Berlin,Germany,6,Retail
+CUST-005,Wei Chen,Shanghai,China,9,Retail
+CUST-006,Mei Zhao,Beijing,China,7,Retail
+CUST-007,Olivia Bennett,London,UK,8,Retail
+CUST-008,Lucas Moreau,Paris,France,5,Retail
+CUST-009,FleetOne Logistics,Dallas,USA,9,Fleet
+CUST-010,EuroFleet GmbH,Munich,Germany,8,Fleet
+CUST-011,RideShare Co,Seattle,USA,7,Lease
+CUST-012,Alessandro Rossi,Milan,Italy,6,Retail
