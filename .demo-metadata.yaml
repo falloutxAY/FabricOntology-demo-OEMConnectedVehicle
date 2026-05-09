@@ -1,0 +1,120 @@
+metadata:
+  name: "OEMConnectedVehicle"
+  version: "1.0"
+  created: "2026-05-08"
+  author: Fabric Ontology Demo Agent
+  specVersion: "3.7"
+
+demo:
+  company: "NovaDrive Motors"
+  industry: "Automotive OEM"
+  domain: "Connected Vehicle Lifecycle (Manufacturing + Customer + Connected + Service + Warranty + Software + Sustainability)"
+  description: "End-to-end OEM ontology with VIN as the universal identity spine, plus a ComplianceRule entity holding 8 natural-language regulatory + internal policies (IRA, EU Battery Reg, NHTSA T1+T2, CSRD, internal warranty + goodwill, OTA-CVE SLA) that the AI agent reads and reasons over. Spans 14 modules of the OEM value chain plus a governance overlay."
+  useCases:
+    - "Battery recall blast radius - 6-hop traversal across NMC cell lot, vehicle, customer, dealer, warranty"
+    - "OTA software vulnerability - identify VINs running unpatched ADAS firmware (CVE-2026-AUTO-0042) and apply rule CR-OTA-CVE 30-day SLA"
+    - "Manufacturing quality-telemetry correlation - find assembly stations whose temp/torque/cycle-time correlate with Critical defects"
+    - "IRA Section 30D mineral compliance - rule-aware: agent reads CR-IRA-30D text and applies the FTA list from CR_NLText (no hard-coded country list)"
+    - "NHTSA recall timing - rule-aware: agent applies CR-NHTSA-T1 (5-day notify, 60-day owner outreach)"
+    - "Goodwill recommendation - rule-aware: agent applies CR-IW-GOOD boundary policy to recommend State='Goodwill' on borderline claims"
+    - "Complete vehicle genealogy - 8-hop production order -> assembly -> component -> supplier in one query"
+    - "Compliance Rules Explorer - browse, read full rule text, simulate what-if rule changes"
+
+ontology:
+  file: Ontology/oem-connected-vehicle-lifecycle.ttl
+  namespace: http://example.com/oemconnectedvehicle#
+  entities:
+    - { name: ConnectedVehicle, key: VIN, keyType: string, hasTimeseries: true }
+    - { name: VehicleVariant, key: VariantId, keyType: string, hasTimeseries: false }
+    - { name: SoftwareRelease, key: SwReleaseId, keyType: string, hasTimeseries: false }
+    - { name: CustomerProfile, key: CustomerId, keyType: string, hasTimeseries: false }
+    - { name: VehicleOwner, key: OwnerId, keyType: string, hasTimeseries: false }
+    - { name: DriveSession, key: SessionId, keyType: string, hasTimeseries: true }
+    - { name: OTAUpdate, key: OTAUpdateId, keyType: string, hasTimeseries: false }
+    - { name: ServiceVisit, key: VisitId, keyType: string, hasTimeseries: false }
+    - { name: RepairTicket, key: TicketId, keyType: string, hasTimeseries: false }
+    - { name: TechServiceBul, key: TSBId, keyType: string, hasTimeseries: false }
+    - { name: WarrantyClaim, key: ClaimId, keyType: string, hasTimeseries: false }
+    - { name: WarrantyPolicy, key: PolicyId, keyType: string, hasTimeseries: false }
+    - { name: RecallCampaign, key: RecallId, keyType: string, hasTimeseries: false }
+    - { name: BatteryPassport, key: BattPassId, keyType: string, hasTimeseries: false }
+    - { name: Component, key: ComponentId, keyType: string, hasTimeseries: false }
+    - { name: QualityEvent, key: EventId, keyType: string, hasTimeseries: false }
+    - { name: Supplier, key: SupplierId, keyType: string, hasTimeseries: false }
+    - { name: Assembly, key: AssemblyId, keyType: string, hasTimeseries: true }
+    - { name: Facility, key: FacilityId, keyType: string, hasTimeseries: true }
+    - { name: ProductionOrder, key: ProdOrderId, keyType: string, hasTimeseries: false }
+    - { name: DealerLocation, key: DealerId, keyType: string, hasTimeseries: true }
+    - { name: ComplianceRule, key: RuleId, keyType: string, hasTimeseries: false }
+
+data:
+  lakehouse:
+    folder: Data/Lakehouse
+    tables:
+      - { name: DimConnectedVehicle, file: DimConnectedVehicle.csv, rowCount: 15 }
+      - { name: DimVehicleVariant, file: DimVehicleVariant.csv, rowCount: 5 }
+      - { name: DimSoftwareRelease, file: DimSoftwareRelease.csv, rowCount: 8 }
+      - { name: DimCustomerProfile, file: DimCustomerProfile.csv, rowCount: 12 }
+      - { name: DimVehicleOwner, file: DimVehicleOwner.csv, rowCount: 15 }
+      - { name: DimDriveSession, file: DimDriveSession.csv, rowCount: 20 }
+      - { name: DimOTAUpdate, file: DimOTAUpdate.csv, rowCount: 20 }
+      - { name: DimServiceVisit, file: DimServiceVisit.csv, rowCount: 15 }
+      - { name: DimRepairTicket, file: DimRepairTicket.csv, rowCount: 15 }
+      - { name: DimTechServiceBul, file: DimTechServiceBul.csv, rowCount: 6 }
+      - { name: DimWarrantyClaim, file: DimWarrantyClaim.csv, rowCount: 15 }
+      - { name: DimWarrantyPolicy, file: DimWarrantyPolicy.csv, rowCount: 4 }
+      - { name: DimRecallCampaign, file: DimRecallCampaign.csv, rowCount: 3 }
+      - { name: DimBatteryPassport, file: DimBatteryPassport.csv, rowCount: 14 }
+      - { name: DimComponent, file: DimComponent.csv, rowCount: 12 }
+      - { name: DimQualityEvent, file: DimQualityEvent.csv, rowCount: 8 }
+      - { name: DimSupplier, file: DimSupplier.csv, rowCount: 8 }
+      - { name: DimAssembly, file: DimAssembly.csv, rowCount: 15 }
+      - { name: DimFacility, file: DimFacility.csv, rowCount: 8 }
+      - { name: DimProductionOrder, file: DimProductionOrder.csv, rowCount: 10 }
+      - { name: DimDealerLocation, file: DimDealerLocation.csv, rowCount: 8 }
+      - { name: DimComplianceRule, file: DimComplianceRule.csv, rowCount: 8 }
+      - { name: EdgeCV_Variant, file: EdgeCV_Variant.csv, rowCount: 15 }
+      - { name: EdgeVariant_SwRelease, file: EdgeVariant_SwRelease.csv, rowCount: 17 }
+      - { name: EdgeCV_PO, file: EdgeCV_PO.csv, rowCount: 15 }
+      - { name: EdgeCV_BattPass, file: EdgeCV_BattPass.csv, rowCount: 14 }
+      - { name: EdgeCV_Session, file: EdgeCV_Session.csv, rowCount: 20 }
+      - { name: EdgeCV_OTA, file: EdgeCV_OTA.csv, rowCount: 20 }
+      - { name: EdgeCV_Claim, file: EdgeCV_Claim.csv, rowCount: 15 }
+      - { name: EdgeCV_Service, file: EdgeCV_Service.csv, rowCount: 15 }
+      - { name: EdgePO_Facility, file: EdgePO_Facility.csv, rowCount: 10 }
+      - { name: EdgeAsm_CV, file: EdgeAsm_CV.csv, rowCount: 15 }
+      - { name: EdgeAsm_Comp, file: EdgeAsm_Comp.csv, rowCount: 30 }
+      - { name: EdgeQE_Asm, file: EdgeQE_Asm.csv, rowCount: 8 }
+      - { name: EdgeOTA_SwRelease, file: EdgeOTA_SwRelease.csv, rowCount: 20 }
+      - { name: EdgeCustomer_Owner, file: EdgeCustomer_Owner.csv, rowCount: 15 }
+      - { name: EdgeOwner_CV, file: EdgeOwner_CV.csv, rowCount: 15 }
+      - { name: EdgeService_Dealer, file: EdgeService_Dealer.csv, rowCount: 15 }
+      - { name: EdgeService_Repair, file: EdgeService_Repair.csv, rowCount: 15 }
+      - { name: EdgeRepair_TSB, file: EdgeRepair_TSB.csv, rowCount: 13 }
+      - { name: EdgeClaim_Policy, file: EdgeClaim_Policy.csv, rowCount: 15 }
+      - { name: EdgeClaim_Repair, file: EdgeClaim_Repair.csv, rowCount: 11 }
+      - { name: EdgeRecall_QE, file: EdgeRecall_QE.csv, rowCount: 3 }
+      - { name: EdgeRecall_Variant, file: EdgeRecall_Variant.csv, rowCount: 6 }
+      - { name: EdgeRecall_CV, file: EdgeRecall_CV.csv, rowCount: 15 }
+      - { name: EdgeRecall_TSB, file: EdgeRecall_TSB.csv, rowCount: 3 }
+      - { name: EdgeBPass_CV, file: EdgeBPass_CV.csv, rowCount: 14 }
+      - { name: EdgeBPass_Comp, file: EdgeBPass_Comp.csv, rowCount: 28 }
+      - { name: EdgeComp_Supplier, file: EdgeComp_Supplier.csv, rowCount: 12 }
+      - { name: EdgeSupplier_Facility, file: EdgeSupplier_Facility.csv, rowCount: 8 }
+      - { name: EdgeDealer_Variant, file: EdgeDealer_Variant.csv, rowCount: 22 }
+      - { name: EdgeRule_BattPass, file: EdgeRule_BattPass.csv, rowCount: 42 }
+      - { name: EdgeRule_Policy, file: EdgeRule_Policy.csv, rowCount: 6 }
+      - { name: EdgeRule_Recall, file: EdgeRule_Recall.csv, rowCount: 6 }
+      - { name: EdgeRule_SwRelease, file: EdgeRule_SwRelease.csv, rowCount: 3 }
+
+  eventhouse:
+    folder: Data/Eventhouse
+    tables:
+      - { name: ConnectedVehicleTelemetry, file: ConnectedVehicleTelemetry.csv, rowCount: 33 }
+      - { name: DriveSessionTelemetry, file: DriveSessionTelemetry.csv, rowCount: 20 }
+      - { name: AssemblyTelemetry, file: AssemblyTelemetry.csv, rowCount: 24 }
+      - { name: FacilityTelemetry, file: FacilityTelemetry.csv, rowCount: 21 }
+      - { name: DealerCapacityTelemetry, file: DealerCapacityTelemetry.csv, rowCount: 18 }
+
+bindings:
+  file: Bindings/bindings.yaml

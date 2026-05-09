@@ -1,0 +1,374 @@
+schema_version: '1.0'
+setup_id: 7a996086-f952-4f07-8b16-2938fb554766
+demo_name: demo-OEMConnectedVehicle
+workspace_id: ec53121a-7764-4e63-aebb-7af2c46f9a66
+started_at: '2026-05-08T21:54:36.904125+00:00'
+status: in_progress
+steps:
+  validate:
+    status: completed
+    started_at: '2026-05-08T21:54:36.908582+00:00'
+    completed_at: '2026-05-08T21:54:36.921713+00:00'
+  create_lakehouse:
+    status: completed
+    artifact_id: 5c12ec7d-1ed3-4774-875a-614d907d5dbd
+    artifact_name: demo_OEMConnectedVehicle_Lakehouse
+    started_at: '2026-05-08T21:54:36.940169+00:00'
+    completed_at: '2026-05-08T21:54:48.719253+00:00'
+  upload_files:
+    status: completed
+    started_at: '2026-05-08T21:54:48.737034+00:00'
+    completed_at: '2026-05-08T21:55:01.501684+00:00'
+    details:
+      uploaded:
+      - DimAssembly.csv
+      - DimConnectedVehicle.csv
+      - DimCustomerProfile.csv
+      - DimDealerLocation.csv
+      - DimDriveSession.csv
+      - DimBatteryPassport.csv
+      - DimComponent.csv
+      - DimComplianceRule.csv
+      - DimFacility.csv
+      - DimProductionOrder.csv
+      - DimOTAUpdate.csv
+      - DimQualityEvent.csv
+      - DimRecallCampaign.csv
+      - DimRepairTicket.csv
+      - DimSoftwareRelease.csv
+      - DimServiceVisit.csv
+      - DimSupplier.csv
+      - DimTechServiceBul.csv
+      - DimVehicleOwner.csv
+      - DimVehicleVariant.csv
+      - DimWarrantyClaim.csv
+      - DimWarrantyPolicy.csv
+      - EdgeAsm_Comp.csv
+      - EdgeAsm_CV.csv
+      - EdgeBPass_Comp.csv
+      - EdgeBPass_CV.csv
+      - EdgeClaim_Repair.csv
+      - EdgeClaim_Policy.csv
+      - EdgeComp_Supplier.csv
+      - EdgeCustomer_Owner.csv
+      - EdgeCV_Claim.csv
+      - EdgeCV_BattPass.csv
+      - EdgeCV_OTA.csv
+      - EdgeCV_PO.csv
+      - EdgeCV_Session.csv
+      - EdgeCV_Service.csv
+      - EdgeCV_Variant.csv
+      - EdgeDealer_Variant.csv
+      - EdgeOwner_CV.csv
+      - EdgeOTA_SwRelease.csv
+      - EdgePO_Facility.csv
+      - EdgeQE_Asm.csv
+      - EdgeRecall_CV.csv
+      - EdgeRecall_TSB.csv
+      - EdgeRecall_QE.csv
+      - EdgeRecall_Variant.csv
+      - EdgeRepair_TSB.csv
+      - EdgeRule_Policy.csv
+      - EdgeRule_BattPass.csv
+      - EdgeRule_Recall.csv
+      - EdgeRule_SwRelease.csv
+      - EdgeService_Dealer.csv
+      - EdgeService_Repair.csv
+      - EdgeSupplier_Facility.csv
+      - EdgeVariant_SwRelease.csv
+      skipped: []
+  load_tables:
+    status: completed
+    started_at: '2026-05-08T21:55:01.533419+00:00'
+    completed_at: '2026-05-08T22:00:29.206027+00:00'
+    details:
+      loaded:
+      - DimAssembly
+      - DimDealerLocation
+      - DimCustomerProfile
+      - DimDriveSession
+      - DimConnectedVehicle
+      - DimComponent
+      - DimBatteryPassport
+      - DimComplianceRule
+      - DimFacility
+      - DimProductionOrder
+      - DimOTAUpdate
+      - DimQualityEvent
+      - DimRecallCampaign
+      - DimRepairTicket
+      - DimSoftwareRelease
+      - DimSupplier
+      - DimServiceVisit
+      - DimVehicleOwner
+      - DimTechServiceBul
+      - DimVehicleVariant
+      - DimWarrantyClaim
+      - DimWarrantyPolicy
+      - EdgeAsm_Comp
+      - EdgeAsm_CV
+      - EdgeBPass_Comp
+      - EdgeBPass_CV
+      - EdgeClaim_Repair
+      - EdgeClaim_Policy
+      - EdgeComp_Supplier
+      - EdgeCV_Claim
+      - EdgeCustomer_Owner
+      - EdgeCV_BattPass
+      - EdgeCV_OTA
+      - EdgeCV_PO
+      - EdgeCV_Session
+      - EdgeCV_Service
+      - EdgeCV_Variant
+      - EdgeOTA_SwRelease
+      - EdgeOwner_CV
+      - EdgeDealer_Variant
+      - EdgePO_Facility
+      - EdgeQE_Asm
+      - EdgeRecall_CV
+      - EdgeRecall_QE
+      - EdgeRecall_TSB
+      - EdgeRecall_Variant
+      - EdgeRepair_TSB
+      - EdgeRule_BattPass
+      - EdgeRule_Policy
+      - EdgeRule_Recall
+      - EdgeRule_SwRelease
+      - EdgeService_Dealer
+      - EdgeSupplier_Facility
+      - EdgeService_Repair
+      - EdgeVariant_SwRelease
+      skipped: []
+  create_eventhouse:
+    status: completed
+    artifact_id: 6a6f716c-50a5-41d2-916e-f9d334f0721a
+    artifact_name: demo_OEMConnectedVehicle_Telemetry
+    started_at: '2026-05-08T22:00:29.229835+00:00'
+    completed_at: '2026-05-08T22:00:38.143154+00:00'
+  ingest_data:
+    status: completed
+    started_at: '2026-05-08T22:00:38.166346+00:00'
+    completed_at: '2026-05-08T22:01:36.134024+00:00'
+    details:
+      ingested_tables:
+      - ConnectedVehicleTelemetry
+      - DriveSessionTelemetry
+      - AssemblyTelemetry
+      - FacilityTelemetry
+      - DealerCapacityTelemetry
+  create_ontology:
+    status: completed
+    artifact_id: 6000b5f3-6f6c-4295-8eda-ac59d875370c
+    artifact_name: demo_OEMConnectedVehicle_Ontology
+    started_at: '2026-05-08T22:01:36.160605+00:00'
+    completed_at: '2026-05-08T22:03:06.488958+00:00'
+    details:
+      entity_count: 22
+      relationship_count: 33
+      ttl_file: C:\Users\ansyeo\OneDrive - Microsoft\Documents\Fabric-Ontology-demoAgent\demo-OEMConnectedVehicle\ontology\oem-connected-vehicle-lifecycle.ttl
+  configure_bindings:
+    status: completed
+    started_at: '2026-05-08T22:03:06.511460+00:00'
+    completed_at: '2026-05-08T22:05:39.296770+00:00'
+    details:
+      lakehouse_bindings: 22
+      eventhouse_bindings: 5
+      relationship_contextualizations: 33
+      validation_errors: []
+  verify:
+    status: completed
+    started_at: '2026-05-08T22:05:39.316612+00:00'
+    completed_at: '2026-05-08T22:06:08.635096+00:00'
+    details:
+      passed:
+      - '✓ Lakehouse exists: demo_OEMConnectedVehicle_Lakehouse'
+      - ✓ Lakehouse has all 55 expected tables
+      - '✓ Eventhouse exists: demo_OEMConnectedVehicle_Telemetry'
+      - '✓ KQL Database exists: demo_OEMConnectedVehicle_Telemetry'
+      - ✓ Eventhouse has all 5 expected tables
+      - ✓ All eventhouse tables have data
+      - '✓ Ontology exists: demo_OEMConnectedVehicle_Ontology'
+      - ✓ Ontology has 0 entities, 0 relationships, 0 properties
+      - ✓ Data bindings configured
+      failed: []
+      warnings: []
+      verification:
+        lakehouse:
+          id: 5c12ec7d-1ed3-4774-875a-614d907d5dbd
+          name: demo_OEMConnectedVehicle_Lakehouse
+          expected_tables:
+          - EdgeSupplier_Facility
+          - EdgeRule_SwRelease
+          - EdgeService_Dealer
+          - EdgeAsm_Comp
+          - EdgeOTA_SwRelease
+          - DimRecallCampaign
+          - EdgeRecall_Variant
+          - DimComplianceRule
+          - EdgeCV_Variant
+          - EdgeComp_Supplier
+          - EdgeCV_OTA
+          - EdgeBPass_CV
+          - EdgeCV_Service
+          - DimOTAUpdate
+          - EdgeBPass_Comp
+          - DimServiceVisit
+          - DimTechServiceBul
+          - DimConnectedVehicle
+          - DimCustomerProfile
+          - EdgeClaim_Policy
+          - EdgeClaim_Repair
+          - EdgeOwner_CV
+          - DimQualityEvent
+          - EdgeQE_Asm
+          - DimComponent
+          - DimDealerLocation
+          - EdgeService_Repair
+          - DimWarrantyPolicy
+          - EdgeDealer_Variant
+          - EdgeAsm_CV
+          - DimBatteryPassport
+          - DimSoftwareRelease
+          - EdgeRule_BattPass
+          - EdgePO_Facility
+          - EdgeCustomer_Owner
+          - EdgeCV_Session
+          - DimDriveSession
+          - EdgeRecall_CV
+          - EdgeCV_BattPass
+          - DimSupplier
+          - EdgeVariant_SwRelease
+          - DimFacility
+          - EdgeRule_Policy
+          - DimWarrantyClaim
+          - DimProductionOrder
+          - DimRepairTicket
+          - EdgeRecall_TSB
+          - EdgeCV_PO
+          - EdgeRecall_QE
+          - EdgeRule_Recall
+          - DimVehicleVariant
+          - EdgeRepair_TSB
+          - DimAssembly
+          - DimVehicleOwner
+          - EdgeCV_Claim
+          existing_tables:
+          - EdgeSupplier_Facility
+          - EdgeRule_SwRelease
+          - EdgeService_Dealer
+          - EdgeAsm_Comp
+          - EdgeOTA_SwRelease
+          - DimRecallCampaign
+          - EdgeRecall_Variant
+          - DimComplianceRule
+          - EdgeCV_Variant
+          - EdgeComp_Supplier
+          - EdgeCV_OTA
+          - EdgeBPass_CV
+          - EdgeCV_Service
+          - DimOTAUpdate
+          - EdgeBPass_Comp
+          - DimServiceVisit
+          - DimTechServiceBul
+          - DimConnectedVehicle
+          - DimCustomerProfile
+          - EdgeClaim_Repair
+          - EdgeClaim_Policy
+          - EdgeOwner_CV
+          - DimQualityEvent
+          - EdgeQE_Asm
+          - DimComponent
+          - DimDealerLocation
+          - EdgeService_Repair
+          - DimWarrantyPolicy
+          - EdgeDealer_Variant
+          - EdgeAsm_CV
+          - DimBatteryPassport
+          - DimSoftwareRelease
+          - EdgeRule_BattPass
+          - EdgePO_Facility
+          - EdgeCustomer_Owner
+          - EdgeCV_Session
+          - DimDriveSession
+          - EdgeRecall_CV
+          - EdgeCV_BattPass
+          - DimSupplier
+          - EdgeVariant_SwRelease
+          - DimFacility
+          - EdgeRule_Policy
+          - DimWarrantyClaim
+          - DimProductionOrder
+          - DimRepairTicket
+          - EdgeRecall_TSB
+          - EdgeCV_PO
+          - EdgeRecall_QE
+          - EdgeRule_Recall
+          - DimVehicleVariant
+          - EdgeRepair_TSB
+          - DimAssembly
+          - DimVehicleOwner
+          - EdgeCV_Claim
+          missing_tables: []
+        eventhouse:
+          id: 6a6f716c-50a5-41d2-916e-f9d334f0721a
+          name: demo_OEMConnectedVehicle_Telemetry
+          kql_database_id: fe09b2c7-7a81-4cce-bf36-e40dba96a002
+          kql_database_name: demo_OEMConnectedVehicle_Telemetry
+          expected_tables:
+          - FacilityTelemetry
+          - ConnectedVehicleTelemetry
+          - DriveSessionTelemetry
+          - AssemblyTelemetry
+          - DealerCapacityTelemetry
+          existing_tables:
+          - 0
+          - 1
+          - 2
+          - FacilityTelemetry
+          - ConnectedVehicleTelemetry
+          - DriveSessionTelemetry
+          - AssemblyTelemetry
+          - DealerCapacityTelemetry
+          - '{"Visualization":null,"Title":null,"XColumn":null,"Series":null,"YColumns":null,"AnomalyColumns":null,"XTitle":null,"YTitle":null,"XAxis":null,"YAxis":null,"Legend":null,"YSplit":null,"Accumulate":false,"IsQuerySorted":false,"Kind":null,"Ymin":"NaN","Ymax":"NaN","Xmin":null,"Xmax":null}'
+          - '2026-05-08T22:05:41.8258332Z'
+          missing_tables: []
+          table_row_counts:
+            FacilityTelemetry: 21
+            ConnectedVehicleTelemetry: 33
+            DriveSessionTelemetry: 20
+            AssemblyTelemetry: 24
+            DealerCapacityTelemetry: 18
+        ontology:
+          id: 6000b5f3-6f6c-4295-8eda-ac59d875370c
+          name: demo_OEMConnectedVehicle_Ontology
+          entity_count: 0
+          relationship_count: 0
+          property_count: 0
+  refresh_graph:
+    status: completed
+    started_at: '2026-05-08T22:06:08.681386+00:00'
+    completed_at: '2026-05-08T22:06:09.208253+00:00'
+    details:
+      ontology_id: 6000b5f3-6f6c-4295-8eda-ac59d875370c
+      ontology_name: demo_OEMConnectedVehicle_Ontology
+      expected_graph_name: demo_OEMConnectedVehicle_Ontology_graph_6000b5f36f6c42958edaac59d875370c
+      action: manual_refresh_required
+      instructions:
+      - 1. Open the Fabric workspace in your browser
+      - '2. Locate the graph item: ''demo_OEMConnectedVehicle_Ontology_graph_6000b5f36f6c42958edaac59d875370c'''
+      - 3. Click '...' to expand the options menu
+      - 4. Select 'Schedule'
+      - 5. Click 'Refresh now' to sync the data
+resources:
+  lakehouse:
+    id: 5c12ec7d-1ed3-4774-875a-614d907d5dbd
+    name: demo_OEMConnectedVehicle_Lakehouse
+  eventhouse:
+    id: 6a6f716c-50a5-41d2-916e-f9d334f0721a
+    name: demo_OEMConnectedVehicle_Telemetry
+  kql_database:
+    id: fe09b2c7-7a81-4cce-bf36-e40dba96a002
+    name: demo_OEMConnectedVehicle_Telemetry
+  ontology:
+    id: 6000b5f3-6f6c-4295-8eda-ac59d875370c
+    name: demo_OEMConnectedVehicle_Ontology
