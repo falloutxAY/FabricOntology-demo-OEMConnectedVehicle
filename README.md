@@ -16,7 +16,6 @@ This demo shows what happens when you give an AI agent a **graph that already sp
 |---|---|
 | **Entities** | 22 (8 manufacturing seed + 13 lifecycle extensions + 1 governance) |
 | **Relationships** | 33 — all bound via dedicated Edge tables (29 lifecycle + 4 governance) |
-| **Compliance Rules** | 8 NL rules (IRA §30D, EU Battery Reg, NHTSA T1+T2, CSRD, internal warranty, goodwill, OTA-CVE SLA) |
 | **Timeseries entities** | 5 (ConnectedVehicle, DriveSession, Assembly, Facility, DealerLocation) |
 | **Lakehouse rows** | ~480 across 55 tables (22 Dim + 33 Edge) |
 | **Eventhouse rows** | ~116 across 5 telemetry tables |
@@ -45,7 +44,6 @@ demo-OEMConnectedVehicle/
 └── MCP-Skills/                        (the NEW Ontology MCP feature)
     ├── README.md
     ├── skill-ontology-explorer.md
-    ├── skill-rules-explorer.md           (NEW — ComplianceRule reasoning)
     ├── skill-quality-recall.md
     ├── skill-connected-vehicle-software.md
     ├── skill-warranty-service.md
@@ -105,17 +103,8 @@ demo-OEMConnectedVehicle/
 - `OneLake security` must be disabled on the bound Lakehouse.
 - Cross-ontology GQL traversal is not currently confirmed in Fabric documentation — keep all 21 entities in a single Ontology item.
 
-## Relationship to existing repo demos
-
-| Existing | Role here |
-|---|---|
-| `AutoManufacturing-SupplyChain/` | Seed pattern for M04/M05 (Manufacturing + Supply Chain). The 6 reused entities (Component, QualityEvent, Supplier, Assembly, Facility, ProductionOrder) are kept as a first-class **manufacturing value lens** — they prove that the new lifecycle entities don't displace the old ones, they extend them. |
-| `demo-MedDeviceSupplyChain/` | Pattern library for regulatory recall genealogy. |
-| `demo-SoccerFanOps/MCP-Skills/` | Template for the MCP-Skills folder structure used here. |
-
 ## Credits and references
 
-- Source research: `mcpdemo/automotive-fabric-ontology-mcp-demo-research.md`
 - Generation guide: `.agentic/agent-instructions.md` (spec v3.7)
 - Catena-X SLDT semantic models (CC-BY-4.0) for battery passport / quality / claim shape inspiration.
 - COVESA VSS v7 (MPL-2.0) for the connected-vehicle telemetry signal taxonomy.
